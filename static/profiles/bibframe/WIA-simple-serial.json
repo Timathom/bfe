@@ -1,0 +1,307 @@
+{"Profile": {
+    "id": "profile:bf:WIA:SimpleSerial",
+    "title": "BIBFRAME Work, Instance, and HeldItem for a Serial -- Simple",
+    "resourceTemplates": [
+        {
+            "resourceURI": "http://bibframe.org/vocab/Text",
+            "id": "profile:bf:Work:Serial",
+            "resourceLabel": "Work -- Serial",
+            "propertyTemplates": [
+                {
+                    "propertyURI": "http://bibframe.org/vocab/sameWork",
+                    "propertyLabel": "Lookup",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "repeatable": "false",
+                        "useValuesFrom": ["http://id.loc.gov/resources/works"]
+                    }
+                },                
+                {
+                    "propertyURI": "http://bibframe.org/vocab/workTitle",
+                    "propertyLabel": "Work title",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "repeatable": "true",
+                        "valueTemplateRefs": ["profile:bf:Title"]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/titleVariation",
+                    "propertyLabel": "Title variation",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Title"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/subject",
+                    "propertyLabel": "Subject",
+                    "type": "resource",
+                    "repeatable": "true",
+                    "valueConstraint": {
+                        "repeatable": "true",
+                        "valueTemplateRefs": [
+                            "profile:bf:Work",
+                            "profile:bf:Topic",
+                            "profile:bf:Place",
+                            "profile:bf:Temporal",
+                            "profile:bf:Person",
+                            "profile:bf:Organization",
+                            "profile:bf:Family",
+                            "profile:bf:Meeting",
+                            "profile:bf:Jurisdiction"
+                        ]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/classificationLcc",
+                    "propertyLabel": "LCC Classification",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Classification"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/contentCategory",
+                    "propertyLabel": "Work content category",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "defaultURI": ["http://id.loc.gov/vocabulary/contentTypes/txt"],
+                        "defaultLiteral": ["text"],
+                        "editable": "true",
+                        "repeatable": "true",
+                        "useValuesFrom": ["http://id.loc.gov/vocabulary/contentTypes"]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/language",
+                    "propertyLabel": "Language of work",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "defaultURI": ["http://id.loc/gov/vocabulary/languages/spa"],
+                        "defaultLiteral": ["Spanish"],
+                        "editable": "true",
+                        "repeatable": "true",
+                        "useValuesFrom": ["http://id.loc.gov/vocabulary/languages"]
+                    }
+                },  
+                {
+                    "propertyURI": "http://bibframe.org/vocab/geographicCoverageNote",
+                    "propertyLabel": "Geographic coverage",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "defaultURI": ["http://id.loc.gov/vocabulary/geographicAreas/s-ag"],
+                        "defaultLiteral": ["Argentina"],
+                        "editable": "true",
+                        "repeatable": "true",
+                        "useValuesFrom": ["http://id.loc.gov/vocabulary/geographicAreas"]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/note",
+                    "propertyLabel": "Note",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/continues",
+                    "propertyLabel": "Continues",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Work:Serial"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/continuedBy",
+                    "propertyLabel": "Continued by",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Work:Serial"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/identifier",
+                    "propertyLabel": "Identifier",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Identifier"]}
+                }
+            ]
+        },
+        {
+            "resourceURI": "http://bibframe.org/vocab/Serial",
+            "id": "profile:bf:Instance:Serial",
+            "resourceLabel": "Instance/Manifestation -- Serial",
+            "propertyTemplates": [
+                {
+                    "propertyURI": "http://bibframe.org/vocab/sameInstance",
+                    "propertyLabel": "Lookup",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "repeatable": "false",
+                        "useValuesFrom": ["http://id.loc.gov/resources/instances"]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/instanceOf",
+                    "propertyLabel": "Instance of",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Work:Serial"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/instanceTitle",
+                    "propertyLabel": "Instance title",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Title"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/edition",
+                    "propertyLabel": "Edition statement",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/frequencyNote",
+                    "propertyLabel": "Frequency note",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/mediaCategory",
+                    "propertyLabel": "Media type",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "defaultURI": ["http://id.loc.gov/vocabulary/mediaTypes/n"],
+                        "defaultLiteral": ["unmediated"],
+                        "editable": "true",
+                        "repeatable": "true",
+                        "useValuesFrom": ["http://id.loc.gov/vocabulary/mediaTypes"]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/carrierCategory",
+                    "propertyLabel": "Carrier",
+                    "type": "resource",
+                    "repeatable": "false",
+                    "valueConstraint": {
+                        "defaultURI": "http://id.loc.gov/vocabulary/carriers/nc",
+                        "defaultLiteral": ["volume"],
+                        "editable": "true",
+                        "repeatable": "true",
+                        "useValuesFrom": ["http://id.loc.gov/vocabulary/carriers"]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/dimensions",
+                    "propertyLabel": "Dimensions",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/publication",
+                    "propertyLabel": "Publication",
+                    "type": "resource",
+                    "repeatable": "true",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Provider"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/note",
+                    "propertyLabel": "Note",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/otherPhysicalFormat",
+                    "propertyLabel": "Has other format",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Instance"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/issn",
+                    "propertyLabel": "ISSN",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Identifier"]}
+                }
+            ]
+        },
+        {
+            "resourceURI": "http://bibframe.org/vocab/HeldItem",
+            "id": "profile:bf:HeldItem:Serial",
+            "resourceLabel": "Holding -- Serial",
+            "propertyTemplates": [
+                {
+                    "propertyURI": "http://bibframe.org/vocab/holdingFor",
+                    "propertyLabel": "Holding for",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Instance:Serial"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/heldBy",
+                    "propertyLabel": "Held by",
+                    "type": "resource",
+                    "repeatable": "false",
+                    "valueConstraint": {
+                        "defaultURI": "http://id.loc.gov/vocabulary/organizations/njp",
+                        "defaultLiteral": "NjP"
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/enumerationAndChronology",
+                    "propertyLabel": "Detailed holdings",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/barcode",
+                    "propertyLabel": "Barcode",
+                    "type": "literal"
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/shelfMarkLcc",
+                    "propertyLabel": "LCC call number",
+                    "type": "literal"
+                }
+            ]
+        },
+        {
+            "resourceURI": "http://bibframe.org/vocab/Annotation",
+            "id": "profile:bf:Annotation:Serial",
+            "resourceLabel": "Annotation -- Serial",
+            "propertyTemplates": [
+                {
+                    "propertyURI": "http://bibframe.org/vocab/annotates",
+                    "propertyLabel": "Annotates",
+                    "type": "resource",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Work:Serial"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/descriptionSource",
+                    "propertyLabel": "Description source",
+                    "type": "resource",
+                    "repeatable": "false",
+                    "valueConstraint": {"valueTemplateRefs": ["profile:bf:Identifier"]}
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/descriptionConventions",
+                    "propertyLabel": "Description conventions",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "repeatable": "true",
+                        "defaultURI": [
+                            "http://id.loc.gov/vocabulary/descriptionConventions/rda",
+                            "http://id.loc.gov/vocabulary/descriptionConventions/isbd"
+                        ],
+                        "defaultLiteral": [
+                            "rda",
+                            "isbd"
+                        ]
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/descriptionLanguage",
+                    "propertyLabel": "Description language",
+                    "type": "resource",
+                    "valueConstraint": {
+                        "defaultURI": "http://id.loc.gov/vocabulary/languages/eng",
+                        "defaultLiteral": "English"
+                    }
+                },
+                {
+                    "propertyURI": "http://bibframe.org/vocab/changeDate",
+                    "propertyLabel": "Change date",
+                    "type": "literal",
+                    "valueConstraint": {
+                        "dataTypeURI": "http://bibframe.org/vocab/proposed/ISO8601",
+                        "dataTypeLabel": "ISO 8601",
+                        "dataTypeLabelHint": "ISO"
+                    }
+                }
+            ]
+        }
+    ]
+}}

@@ -1,90 +1,37 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>BF Editor</title>
-        
-        <script src="builds/bfe.min.js"></script>
-        <link href="builds/bfe.min.css" rel="stylesheet" />
-        
-        <script type="text/javascript">
-            function myCB(jsonld) {
-                var humanized = bfeditor.bfestore.store2text();
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
-                document.getElementById("bfeditor").innerHTML = '<div class="row"><div class="col-md-12 text-right"><a href="index.html"><button type="button" class="btn btn-default btn-lg">Start Over</button></a></div></div><h1>Simple HTML View</h1><pre>' + humanized + '</pre><br /><h1>JSONLD-Expanded</h1><pre>' + JSON.stringify(jsonld, undefined, " ") + '</pre>';
-            }
-            
-            var config = {
-                "baseURI": "http://example.org/",
-                "profiles": [
-                    "/static/profiles/bibframe/Agents.json",
-                    "/static/profiles/bibframe/Annotations.json",
-                    "/static/profiles/bibframe/Authorities.json",
-                    "/static/profiles/bibframe/Entities.json",
-                    "/static/profiles/bibframe/WIA.json",
-                    "/static/profiles/bibframe/WIA-monograph-simple.json",
-                ],
-                "startingPoints": [
-                    {
-                        "menuGroup": "BIBFRAME - Kitchen Sink Profiles",
-                        "menuItems": [
-                            {
-                                label: "New HeldItem", 
-                                useResourceTemplates: [ "profile:bf:HeldItem" ]
-                            },
-                            {
-                                label: "New Instance", 
-                                useResourceTemplates: [ "profile:bf:Instance" ]
-                            },
-                            {
-                                label: "New Work", 
-                                useResourceTemplates: [ "profile:bf:Work" ]
-                            },
-                            {
-                                label: "New Work, Instance, & HeldItem", 
-                                useResourceTemplates: [ "profile:bf:Work", "profile:bf:Instance", "profile:bf:HeldItem" ]
-                            },
-                        ]
-                    },
-                    {
-                        "menuGroup": "BIBFRAME - Simple Monograph",
-                        "menuItems": [
-                            {
-                                label: "Add holding", 
-                                useResourceTemplates: [ "profile:bf:HeldItem:Monograph" ]
-                            },
-                            {
-                                label: "Catalog manifestation", 
-                                useResourceTemplates: [ "profile:bf:Instance:Monograph" ]
-                            },
-                            {
-                                label: "New work", 
-                                useResourceTemplates: [ "profile:bf:Work:Monograph" ]
-                            },
-                            {
-                                label: "New monograph (New Work, Instance, and Holding)", 
-                                useResourceTemplates: [ "profile:bf:Work:Monograph", "profile:bf:Instance:Monograph", "profile:bf:HeldItem:Monograph" ]
-                            },
-                        ]
-                    }
-                ],
-                "return": {
-                    "format": "jsonld-expanded",
-                    "callback": myCB
-                }
+<!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <title>BF Editor Index</title>
+    <script type="text/javascript" src="src/lib/jquery-2.1.0.min.js"></script>
+    <link href="builds/bfe.min.css" rel="stylesheet" />
+    <script type="text/javascript">   
+        $(function() {
+           $.getJSON( "dataIndex.json", function( data ) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                //items.push("<li><a href='editor.html?WorkUri='" + data[i].WorkUri + "&amp;InstanceUri=" + data[i].InstanceUri + "&amp;ItemUri=" + data[i].ItemUri + "'></a>");
+                items.push("<li><a href='editor.html?WorkUri=" + data[i].WorkUri + "&amp;InstanceUri=" + data[i].InstanceUri + "&amp;ItemUri=" + data[i].ItemUri + "'>" + data[i].title + "</a>");
+
             }
 
-        </script>
-        
-    </head>
-    <body>
-    
-    <div class="container">
-      <div id="bfeditor" />
-    </div>
-    
-    <script type="text/javascript">
-        var bfeditor = bfe.fulleditor(config, "bfeditor");
+            //"<li id='" + key + "'>" + val + "</li>" 
+
+            $( "<ul/>", {
+                "class": "my-new-list",
+                html: items.join( "" )
+            }).appendTo( "body" );    
+                
+                
+           }); 
+        });
     </script>
-    
+    <body>
+        <h1>BIBFRAME Editor index page</h1>
+        <h3>Start from scratch:</h3>
+        <ul>
+            <li>
+                <a href="new_editor.html">Blank BFE form</a>
+            </li>
+        </ul>
+        <h3>Reopen and edit an existing resource description:</h3>
     </body>
 </html>

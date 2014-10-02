@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BF Editor</title>
+        <script src="builds/bfe.js"></script>        
+        <link href="builds/bfe.min.css" rel="stylesheet" />
+        <script type="text/javascript">    
+
+            //var sourceUri = "http://id.loc.gov/resources/bibs/5227";
+            //var sourceLoc = "http://id.loc.gov/resources/bibs/5227.bibframe_raw.jsonp";
+            //var sourceUri = "http://example.org/27c1fe4d-0146-9adf-d6ca-d4e4fd08aec5";
+
+            $(function() {
+
+                $(".modal-dialog").find("h3").css( "background-color", "red" );
+
+
+            });
+
+            function myCB(jsonld) {
+            
+                /*   
+                var humanized = bfeditor.bfestore.store2text();
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                document.getElementById("bfeditor").innerHTML = '<div class="row"><div class="col-md-12 text-right"><a href="index.html"><button type="button" class="btn btn-default btn-lg">Start Over</button></a></div></div><h1>Simple HTML View</h1><pre>' + humanized + '</pre><br /><h1>JSONLD-Expanded</h1><pre>' + JSON.stringify(jsonld, undefined, " ") + '</pre>';
+                */
+
+                                                            
+                $.ajax({
+                    type: 'POST',
+                    url: 'server-bfe.js',
+                    data : {
+                        jsonLd: JSON.stringify(jsonld)
+                    },
+                    dataType: 'text'                                 
+                })
+
+                .done(function() {
+
+                    alert( "Saved to database!" );
+                    //window.location.replace('test_page.html');
+                });  
+                                      
+           }
+                                            
+            var config = {
+                "baseURI": "http://example.org/",
+                "profiles": [
+                    "/static/profiles/bibframe/Agents.json",
+                    "/static/profiles/bibframe/Annotations.json",
+                    "/static/profiles/bibframe/Authorities.json",
+                    "/static/profiles/bibframe/Entities.json",
+                    "/static/profiles/bibframe/WIA.json",
+                    "/static/profiles/bibframe/WIA-monograph-simple.json",
+                    "/static/profiles/bibframe/WIA-serial-simple.json"
+                ],
+                "startingPoints": [
+                    {
+                        "menuGroup": "BIBFRAME -- Kitchen Sink Profiles",
+                        "menuItems": [
+                            {
+                                label: "New HeldItem", 
+                                useResourceTemplates: [ "profile:bf:HeldItem" ]
+                            },
+                            {
+                                label: "New Instance", 
+                                useResourceTemplates: [ "profile:bf:Instance" ]
+                            },
+                            {
+                                label: "New Work", 
+                                useResourceTemplates: [ "profile:bf:Work" ]
+                            },
+                            {
+                                label: "New Work, Instance, & HeldItem", 
+                                useResourceTemplates: [ "profile:bf:Work", "profile:bf:Instance", "profile:bf:HeldItem" ]
+                            },
+                        ]
+                    },
+                    {
+                        "menuGroup": "BIBFRAME -- Simple Serial",
+                        "menuItems": [
+                            {
+                                label: "Add Holding", 
+                                useResourceTemplates: [ "profile:bf:HeldItem:Serial" ]
+                            },
+                            {
+                                label: "Catalog Instance", 
+                                useResourceTemplates: [ "profile:bf:Instance:Serial" ]
+                            },
+                            {
+                                label: "New Work", 
+                                useResourceTemplates: [ "profile:bf:Work:Serial" ]
+                            },
+                            {
+                                label: "New Serial (New Work, Instance, and Holding)", 
+                                useResourceTemplates: [ "profile:bf:Work:Serial", "profile:bf:Instance:Serial", "profile:bf:HeldItem:Serial", "profile:bf:Annotation:Serial" ]
+                            },
+                        ]
+                    },
+                    
+                ],
+                "return": {
+                    "format": "jsonld-expanded",
+                    "callback": myCB
+                }
+
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <div class="container">
+            <div id="bfeditor"></div>
+        </div>
+        <script type="text/javascript">
+            if (typeof params["WorkUri"] !== "undefined") {
+                var bfeditor = bfe.editor(config, "bfeditor");    
+            }
+            else {
+                var bfeditor = bfe.fulleditor(config, "bfeditor");        
+            }
+            
+        </script>        
+    </body>
+</html>
