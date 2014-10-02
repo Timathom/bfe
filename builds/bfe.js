@@ -592,6 +592,7 @@ bfe.define('src/bfe', ['require', 'exports', 'module' , 'src/lib/jquery-2.1.0.mi
                     <button id="bfeditor-exitcancel" type="button" class="btn btn-default">Cancel</button> \
                     <!-- <button id="bfeditor-exitsaveasnew" type="button" class="btn btn-primary">Save as new</button> --> \
                     <button id="bfeditor-exitsave" type="button" class="btn btn-primary">Save</button> \
+                    <button id="bfeditor-exitback" type="button" class="btn btn-default"><a href="index.html">Back</a></button> \ 
                 </div>');
                 form.form.append($exitButtonGroup);
                 
@@ -607,6 +608,7 @@ bfe.define('src/bfe', ['require', 'exports', 'module' , 'src/lib/jquery-2.1.0.mi
                 $("#bfeditor-exitsave", form.form).click(function(){
                     editorconfig.return.callback(bfestore.store2jsonldExpanded());
                 });
+                
                 $("#bfeditor-exitsave", form.form).attr("tabindex", tabIndices++);
                 
                 $("#bfeditor-formdiv").html("");
