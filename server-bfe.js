@@ -33,7 +33,7 @@ connect.createServer(connect.static (__dirname), function (request, response) {
 
             //parse.pipe(filed('data.json')).pipe(jParse);
 
-            fs.writeFile('data' + WorkId + '.json', parse, function (err) {
+            fs.writeFile('output/data' + WorkId + '.json', parse, function (err) {
               if (err) throw err;
               console.log('It\'s saved!');
             });
