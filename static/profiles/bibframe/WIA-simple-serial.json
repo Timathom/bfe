@@ -7,6 +7,7 @@
             "id": "profile:bf:Work:Serial",
             "resourceLabel": "Work -- Serial",
             "propertyTemplates": [
+                {},
                 {
                     "propertyURI": "http://bibframe.org/vocab/sameWork",
                     "propertyLabel": "Lookup",
