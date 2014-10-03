@@ -20,12 +20,18 @@ connect.createServer(connect.static (__dirname), function (request, response) {
             var parse = request.post.jsonLd;
             var jParse = JSON.parse(parse);
             var WorkDataId = jParse[0]['@id'];
-            var WorkId = WorkDataId.substring(19);
+            var WorkId = WorkDataId.substring(29);
             var InstanceDataId = jParse[1]['@id']            
-            var InstanceId = InstanceDataId.substring(19);
+            var InstanceId = InstanceDataId.substring(29);
             var ItemDataId = jParse[2]['@id']
-            var ItemId = ItemDataId.substring(19);
-            var title = jParse[0]['http://bibframe.org/vocab/workTitle'][0]['@value'];
+            var ItemId = ItemDataId.substring(29);
+            var title = jParse[0]['http://bibframe.org/vocab/workTitle'][0]['@id'];
+
+            for (var i = 0; i < jParse.length; i++) {
+                if (jParse[i]['@id'] == title) {
+                    title = jParse[i]['http://bibframe.org/vocab/titleValue'][0]['@value'];
+                }
+            };
             
             //console.log(jParse[1]);
             //console.log(jParse[2]);
@@ -57,14 +63,14 @@ connect.createServer(connect.static (__dirname), function (request, response) {
             }   
  
             function readContent(callback) {    // http://stackoverflow.com/questions/10058814/get-data-from-fs-readfile
-                fs.readFile("dataIndex.json", function (err, content) {
+                fs.readFile("output/dataIndex.json", function (err, content) {
                     if (err) return callback (err)
-                    callback(null, content)
+                    callback(null, content);
                 });
             }
 
             readContent(function (err, content) {
-
+                
                 if (Buffer.isBuffer(content)) { 
                     result = content.toString('utf8'); 
                 }
@@ -88,7 +94,7 @@ connect.createServer(connect.static (__dirname), function (request, response) {
                 try {
                     data.push(newData);
                     var newFile = JSON.stringify(data);
-                    fs.writeFile('dataIndex.json', newFile, function (err) {
+                    fs.writeFile('output/dataIndex.json', newFile, function (err) {
                       if (err) throw err;
                       console.log('Data was appended to file!');
                     });
