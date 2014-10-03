@@ -24,7 +24,10 @@
         "@id": "http://library.princeton.edu/057f6991-6b52-5856-548f-95d70d5aeed5",
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [{"@id": "http://bibframe.org/vocab/Annotation"}],
         "http://bibframe.org/vocab/annotates": [{"@id": "http://library.princeton.edu/bf824327-b6e6-1a8e-8b96-a1e9e24d10ca"}],
-        "http://bibframe.org/vocab/descriptionConventions": [{"@id": ["http://id.loc.gov/vocabulary/descriptionConventions/rda"]}],
+        "http://bibframe.org/vocab/descriptionConventions": [{"@id": [
+            "http://id.loc.gov/vocabulary/descriptionConventions/rda",
+            "http://id.loc.gov/vocabulary/descriptionConventions/isbd"
+        ]}],
         "http://bibframe.org/vocab/descriptionLanguage": [{"@id": "http://id.loc.gov/vocabulary/languages/eng"}]
     },
     {
